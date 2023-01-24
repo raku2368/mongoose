@@ -30,7 +30,7 @@ app.get("/", (request, response) => {
   response.send("Hi");
 });
 
-app.get("/player-data/:id", async (request, response) => {
+app.get("/:id", async (request, response) => {
   async function playerDataCheck() {
     const playerData = await playerModel.findOne({
       userID: `${request.params.id}`
@@ -53,7 +53,7 @@ app.get("/player-data/:id", async (request, response) => {
   response.json(await playerDataCheck());
 });
 
-app.get("/player-data/:id/:coins", async (request, response) => {
+app.get("/:id/:coins", async (request, response) => {
   await playerModel.findOneAndUpdate(
     { userID: `${request.params.id}` },
     { $set: { coins: `${request.params.coins}` } }
